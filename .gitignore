@@ -1,0 +1,9 @@
+*.csv
+*.csv.gz
+*.gz
+*.sav
+*.dta
+*.parquet
+data/
+_physionet_cred.json
+_physionet_cookies.json
