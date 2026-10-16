@@ -1,5 +1,7 @@
 # 10_h1_combo.R — 第1步：VTI 低 × 淤血高 联合分层；+ 缺失/敏感性
-setwd('F:/openclaw_workspace/sepsis_echo_lit')
+# --- portable working directory: 1st CLI argument, else this script's own directory ---
+{ .a <- grep('^--file=', commandArgs(FALSE), value=TRUE)
+  setwd(if (length(.a)) dirname(normalizePath(sub('^--file=', '', .a[1]))) else getwd()) }
 num<-function(x) suppressWarnings(as.numeric(x))
 h<-read.csv('h1_data.csv',stringsAsFactors=FALSE)
 c<-read.csv('congestion_analysis.csv',stringsAsFactors=FALSE)
@@ -10,6 +12,9 @@ suppressMessages(library(survival))
 HRr<-function(fit,term){ b<-summary(fit)$coefficients
   if(!(term %in% rownames(b))) return('NA')
   sprintf('%.2f (%.2f-%.2f) p=%.2g', exp(b[term,1]), exp(b[term,1]-1.96*b[term,3]), exp(b[term,1]+1.96*b[term,3]), b[term,5]) }
+HRr5<-function(fit,term){ b<-summary(fit)$coefficients      # per +5 cm (coef is per +1 cm)
+  if(!(term %in% rownames(b))) return('NA')
+  sprintf('%.2f (%.2f-%.2f) p=%.2g', exp(b[term,1]*5), exp((b[term,1]-1.96*b[term,3])*5), exp((b[term,1]+1.96*b[term,3])*5), b[term,5]) }
 cov<-'age+sex+sofa+charlson+lactate+creat'
 
 cc<-complete.cases(m[,c('event90','fu_days','age','sex','sofa','charlson','lactate','creat','vti','score3')])&m$fu_days>0&m$vti>0
@@ -33,8 +38,8 @@ for(v in c('age','sofa','sapsii','charlson','lactate','creat','death90')) {
 }
 cat('\n== 敏感性 ==\n')
 s1<-d[!(d$fu_days<=1 & d$event90==1),]; f<-coxph(as.formula(paste('Surv(fu_days,event90)~',cov,'+ vti')),data=s1)
-cat('  排除<24h早死: per+5cm',HRr(f,'vti'),' (N=',nrow(s1),')\n')
+cat('  排除<24h早死: per+5cm',HRr5(f,'vti'),' (N=',nrow(s1),')\n')
 s2<-d[d$vti<=40,]; f<-coxph(as.formula(paste('Surv(fu_days,event90)~',cov,'+ vti')),data=s2)
-cat('  排除VTI>40: per+5cm',HRr(f,'vti'),' (N=',nrow(s2),')\n')
+cat('  排除VTI>40: per+5cm',HRr5(f,'vti'),' (N=',nrow(s2),')\n')
 s3<-d[d$vti>=5,]; f<-coxph(as.formula(paste('Surv(fu_days,event90)~',cov,'+ vti')),data=s3)
-cat('  排除VTI<5 : per+5cm',HRr(f,'vti'),' (N=',nrow(s3),')\n')
+cat('  排除VTI<5 : per+5cm',HRr5(f,'vti'),' (N=',nrow(s3),')\n')
