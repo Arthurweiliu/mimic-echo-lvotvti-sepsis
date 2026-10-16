@@ -1,6 +1,9 @@
 # 11_mi.R — 多重插补（mice）敏感性：H1 主模型
-.libPaths(c('F:/openclaw_workspace/Rlibs', .libPaths()))
-setwd('F:/openclaw_workspace/sepsis_echo_lit')
+# optional extra library path: set H1_LIB if your R packages live outside the default library
+if (nzchar(Sys.getenv('H1_LIB'))) .libPaths(c(Sys.getenv('H1_LIB'), .libPaths()))
+# --- portable working directory: 1st CLI argument, else this script's own directory ---
+{ .a <- grep('^--file=', commandArgs(FALSE), value=TRUE)
+  setwd(if (length(.a)) dirname(normalizePath(sub('^--file=', '', .a[1]))) else getwd()) }
 num<-function(x) suppressWarnings(as.numeric(x))
 d<-read.csv('h1_data.csv',stringsAsFactors=FALSE)
 for(v in c('age','sofa','sapsii','charlson','lactate','creat','fu_days','event90','death28','vti')) d[[v]]<-num(d[[v]])
@@ -31,4 +34,10 @@ poolcont<-function(){
   c(HR5=exp(q*5), lo=exp((q-1.96*s)*5), hi=exp((q+1.96*s)*5), p=2*pnorm(-abs(q/s)))
 }
 r2<-poolcont(); cat(sprintf('  每+5cm HR=%.2f (%.2f-%.2f) p=%.3g\n', r2['HR5'],r2['lo'],r2['hi'],r2['p']))
-cat('\n(对照 完整病例: <17 HR=1.33 1.21-1.46; 每+5cm HR=0.98)\n')
+# complete-case comparison (same contrasts) computed here, not hard-coded
+ccs<-d[complete.cases(d[,c('age','sex','sofa','charlson','lactate','creat','vti')]),]
+fcc<-coxph(Surv(fu_days,event90)~age+sex+sofa+charlson+lactate+creat+I(vti<17), data=ccs); bc<-summary(fcc)$coefficients; ic<-grep('vti < 17',rownames(bc))
+fcc2<-coxph(Surv(fu_days,event90)~age+sex+sofa+charlson+lactate+creat+vti, data=ccs); bc2<-summary(fcc2)$coefficients
+cat(sprintf('\n(对照 完整病例 N=%d: <17 HR=%.2f %.2f-%.2f; 每+5cm HR=%.2f %.2f-%.2f)\n',
+  nrow(ccs), exp(bc[ic,1]), exp(bc[ic,1]-1.96*bc[ic,3]), exp(bc[ic,1]+1.96*bc[ic,3]),
+  exp(bc2['vti',1]*5), exp((bc2['vti',1]-1.96*bc2['vti',3])*5), exp((bc2['vti',1]+1.96*bc2['vti',3])*5)))
