@@ -1,5 +1,7 @@
 # 13_ph_sens.R — PH 假设违背的敏感性（时间变换 tt + 限制随访）
-setwd('F:/openclaw_workspace/sepsis_echo_lit')
+# --- portable working directory: 1st CLI argument, else this script's own directory ---
+{ .a <- grep('^--file=', commandArgs(FALSE), value=TRUE)
+  setwd(if (length(.a)) dirname(normalizePath(sub('^--file=', '', .a[1]))) else getwd()) }
 num<-function(x) suppressWarnings(as.numeric(x))
 d<-read.csv('h1_data.csv',stringsAsFactors=FALSE)
 for(v in c('age','sofa','charlson','lactate','creat','fu_days','event90','vti')) d[[v]]<-num(d[[v]])
