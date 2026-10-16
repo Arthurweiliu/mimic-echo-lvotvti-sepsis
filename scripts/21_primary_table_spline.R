@@ -1,5 +1,7 @@
 # 21_primary_table_spline.R — 主分析人群(5,410) Table1 + 限制性立方样条 HR 图
-setwd('F:/openclaw_workspace/sepsis_echo_lit')
+# --- portable working directory: 1st CLI argument, else this script's own directory ---
+{ .a <- grep('^--file=', commandArgs(FALSE), value=TRUE)
+  setwd(if (length(.a)) dirname(normalizePath(sub('^--file=', '', .a[1]))) else getwd()) }
 num<-function(x) suppressWarnings(as.numeric(x))
 d<-read.csv('h1_data.csv',stringsAsFactors=FALSE)
 for(v in c('age','sofa','sapsii','charlson','lactate','creat','mbp_min','hr_mean','lvef','norepi',
@@ -50,8 +52,13 @@ V<-vcov(fit)[grep('ns\\(vti',rownames(vcov(fit))), grep('ns\\(vti',rownames(vcov
 dX<-sweep(X[, -1, drop=FALSE], 2, Xr[1,-1], '-')
 lhr<-as.numeric(dX %*% coef(fit)[grep('ns\\(vti',names(coef(fit)))])
 se<-sqrt(diag(dX %*% V %*% t(dX)))
-png('H1_spline_HR.png', 3900, 3000, res=600); par(mar=c(5.5,5.5,2,2))
-plot(vt, exp(lhr), type='l', lwd=3, ylim=c(0.4, 3), xlab='LVOT-VTI (cm)', ylab='Adjusted HR (ref = 20 cm)')
-lines(vt, exp(lhr-1.96*se), lty=2); lines(vt, exp(lhr+1.96*se), lty=2)
-abline(h=1, lty=3, col='grey40'); abline(v=17, lty=4, col='red')
+xr <- c(8, 40)   # clinical/estimable range
+lo <- exp(lhr-1.96*se); hi <- exp(lhr+1.96*se)
+keep <- vt >= xr[1] & vt <= xr[2] & hi <= 4 & lo >= 0.3
+ymax <- min(max(hi[keep]), 4); ymin <- max(min(lo[keep]), 0)
+png('H1_spline_HR.png', 3900, 3000, res=600); par(mar=c(5.4,5.4,2.2,1.6))
+plot(vt[keep], exp(lhr)[keep], type='l', lwd=3, ylim=c(ymin, ymax),
+     xlab='LVOT-VTI (cm)', ylab='Adjusted HR (ref = 20 cm)', cex.lab=1.1, cex.axis=1.0)
+lines(vt[keep], lo[keep], lty=2); lines(vt[keep], hi[keep], lty=2)
+abline(h=1, lty=3, col='grey40'); abline(v=17, lty=4, col='black')
 dev.off(); cat('saved H1_spline_HR.png\n')
