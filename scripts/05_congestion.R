@@ -1,5 +1,7 @@
 # 05_congestion.R — 右心/静脉淤血负担评分 vs AKI/RRT/死亡（base R + survival）
-setwd('F:/openclaw_workspace/sepsis_echo_lit')
+# --- portable working directory: 1st CLI argument, else this script's own directory ---
+{ .a <- grep('^--file=', commandArgs(FALSE), value=TRUE)
+  setwd(if (length(.a)) dirname(normalizePath(sub('^--file=', '', .a[1]))) else getwd()) }
 d <- read.csv('congestion_analysis.csv', stringsAsFactors = FALSE)
 num <- function(x) suppressWarnings(as.numeric(x))
 for (v in c('age','sofa','sapsii','charlson','lactate','creat','days','death28','death90',
