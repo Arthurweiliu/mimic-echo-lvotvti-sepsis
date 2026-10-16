@@ -1,5 +1,7 @@
 # 08_h1_outputs.R — Table1(完整) + 森林图 (per +5 cm)
-setwd('F:/openclaw_workspace/sepsis_echo_lit')
+# --- portable working directory: 1st CLI argument, else this script's own directory ---
+{ .a <- grep('^--file=', commandArgs(FALSE), value=TRUE)
+  setwd(if (length(.a)) dirname(normalizePath(sub('^--file=', '', .a[1]))) else getwd()) }
 num<-function(x) suppressWarnings(as.numeric(x))
 d<-read.csv('h1_data.csv',stringsAsFactors=FALSE)
 for(v in c('age','sofa','sapsii','charlson','lactate','creat','mbp_min','hr_mean','temp_mean','spo2_min',
