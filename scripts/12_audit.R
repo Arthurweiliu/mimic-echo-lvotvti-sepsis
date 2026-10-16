@@ -1,6 +1,9 @@
 # 12_audit.R — 按协议反向核查研究过程
-.libPaths(c('F:/openclaw_workspace/Rlibs', .libPaths()))
-setwd('F:/openclaw_workspace/sepsis_echo_lit')
+# optional extra library path: set H1_LIB if your R packages live outside the default library
+if (nzchar(Sys.getenv('H1_LIB'))) .libPaths(c(Sys.getenv('H1_LIB'), .libPaths()))
+# --- portable working directory: 1st CLI argument, else this script's own directory ---
+{ .a <- grep('^--file=', commandArgs(FALSE), value=TRUE)
+  setwd(if (length(.a)) dirname(normalizePath(sub('^--file=', '', .a[1]))) else getwd()) }
 num<-function(x) suppressWarnings(as.numeric(x))
 d<-read.csv('h1_data.csv',stringsAsFactors=FALSE)
 for(v in c('age','sofa','charlson','lactate','creat','fu_days','event90','death90','vti','norepi','mbp_min')) d[[v]]<-num(d[[v]])
