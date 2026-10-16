@@ -1,5 +1,7 @@
 # 19_selection.R — ③ TTE(±72h) vs 无 TTE 选择偏倚对照
-setwd('F:/openclaw_workspace/sepsis_echo_lit')
+# --- portable working directory: 1st CLI argument, else this script's own directory ---
+{ .a <- grep('^--file=', commandArgs(FALSE), value=TRUE)
+  setwd(if (length(.a)) dirname(normalizePath(sub('^--file=', '', .a[1]))) else getwd()) }
 num<-function(x) suppressWarnings(as.numeric(x))
 cov<-read.csv('cohort_covariates.csv',stringsAsFactors=FALSE)
 ak<-read.csv('aki_outcomes.csv',stringsAsFactors=FALSE)
