@@ -1,3 +1,4 @@
+# Data must NOT be committed (PhysioNet DUA): exclude all data and credentials
 *.csv
 *.csv.gz
 *.gz
@@ -5,5 +6,10 @@
 *.dta
 *.parquet
 data/
+physionet/
 _physionet_cred.json
 _physionet_cookies.json
+*.pdf
+*.docx
+*.tiff
+*.png
