@@ -1,5 +1,7 @@
 # 24_lvef_vs_vti.R — LVOT-VTI vs LVEF 头对头模型对比（+相关性）
-setwd('F:/openclaw_workspace/sepsis_echo_lit')
+# --- portable working directory: 1st CLI argument, else this script's own directory ---
+{ .a <- grep('^--file=', commandArgs(FALSE), value=TRUE)
+  setwd(if (length(.a)) dirname(normalizePath(sub('^--file=', '', .a[1]))) else getwd()) }
 num<-function(x) suppressWarnings(as.numeric(x))
 d<-read.csv('h1_data.csv',stringsAsFactors=FALSE)
 for(v in c('age','sofa','charlson','lactate','creat','lvef','fu_days','event90','death28','vti')) d[[v]]<-num(d[[v]])
