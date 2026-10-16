@@ -1,5 +1,7 @@
 # 06_scan.R — 候选假设快速信号扫描（base R + survival）
-setwd('F:/openclaw_workspace/sepsis_echo_lit')
+# --- portable working directory: 1st CLI argument, else this script's own directory ---
+{ .a <- grep('^--file=', commandArgs(FALSE), value=TRUE)
+  setwd(if (length(.a)) dirname(normalizePath(sub('^--file=', '', .a[1]))) else getwd()) }
 num <- function(x) suppressWarnings(as.numeric(x))
 a <- read.csv('analysis_data.csv', stringsAsFactors=FALSE)
 c <- read.csv('congestion_analysis.csv', stringsAsFactors=FALSE)
