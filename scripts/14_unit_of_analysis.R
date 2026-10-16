@@ -1,28 +1,33 @@
-# 14_unit_of_analysis.R — 分析单元核查：多 ICU stay/患者的处理
-setwd('F:/openclaw_workspace/sepsis_echo_lit')
+# 14_unit_of_analysis.R — unit of analysis: all eligible stays vs one record per patient
+# Outputs: [A] all eligible ICU stays, [B] first ICU stay per patient (primary analysis),
+#          [C] all stays with patient-clustered robust standard errors.
+# --- portable working directory: 1st CLI argument, else this script's own directory ---
+{ .a <- grep('^--file=', commandArgs(FALSE), value=TRUE)
+  setwd(if (length(.a)) dirname(normalizePath(sub('^--file=', '', .a[1]))) else getwd()) }
 num<-function(x) suppressWarnings(as.numeric(x))
-d<-read.csv('h1_data.csv',stringsAsFactors=FALSE)
-cc<-read.csv('cohort_covariates.csv',stringsAsFactors=FALSE)
-for(v in c('age','sofa','charlson','lactate','creat','fu_days','event90','vti')) d[[v]]<-num(d[[v]])
-d$sex<-factor(ifelse(d$sex %in% c('M','F'),d$sex,NA))
-m<-merge(d, cc[,c('stay_id','icu_intime','first_icu_stay')], by='stay_id', all.x=TRUE)
+covs<-c('age','sex','sofa','charlson','lactate','creat','vti')
+prep<-function(x){
+  for(v in c('age','sofa','charlson','lactate','creat','fu_days','event90','vti')) x[[v]]<-num(x[[v]])
+  x$sex<-factor(ifelse(x$sex %in% c('M','F'),x$sex,NA))
+  x
+}
 suppressMessages(library(survival))
-dd<-m[complete.cases(m[,c('event90','fu_days','age','sex','sofa','charlson','lactate','creat','vti')])&m$fu_days>0&m$vti>0,]
-cat('分析集(完整病例) N stays=',nrow(dd),' 唯一患者=',length(unique(dd$subject_id)),'\n')
-tab<-table(table(dd$subject_id)); cat('每患者 stay 数分布:\n'); print(tab)
-cat('>1 stay 的患者数=',sum(table(dd$subject_id)>1),' 其贡献 stays=',sum(table(dd$subject_id)[table(dd$subject_id)>1]),'\n')
-dd$vlow<-as.numeric(dd$vti<17)
 cov<-'age+sex+sofa+charlson+lactate+creat'
-f_all<-coxph(as.formula(paste('Surv(fu_days,event90)~',cov,'+ vlow')),data=dd)
-b<-summary(f_all)$coefficients
-cat(sprintf('\n[A] 全部 stays:  VTI<17 HR=%.2f (%.2f-%.2f) p=%.3g\n', exp(b['vlow',1]),exp(b['vlow',1]-1.96*b['vlow',3]),exp(b['vlow',1]+1.96*b['vlow',3]),b['vlow',5]))
-# [B] 每患者仅首次 ICU（最早 intime）
-m2<-m[complete.cases(m[,c('event90','fu_days','age','sex','sofa','charlson','lactate','creat','vti','icu_intime')])&m$fu_days>0&m$vti>0,]
-m2<-m2[order(m2$subject_id, m2$icu_intime),]
-first<-m2[!duplicated(m2$subject_id),]
-first$vlow<-as.numeric(first$vti<17)
-f_f<-coxph(as.formula(paste('Surv(fu_days,event90)~',cov,'+ vlow')),data=first); bf<-summary(f_f)$coefficients
-cat(sprintf('[B] 仅首次 ICU: N=%d (患者=%d) VTI<17 HR=%.2f (%.2f-%.2f) p=%.3g\n', nrow(first), length(unique(first$subject_id)), exp(bf['vlow',1]),exp(bf['vlow',1]-1.96*bf['vlow',3]),exp(bf['vlow',1]+1.96*bf['vlow',3]),bf['vlow',5]))
-# [C] 全部 stays + 患者聚类稳健方差
-f_c<-coxph(as.formula(paste('Surv(fu_days,event90)~',cov,'+ vlow + cluster(subject_id)')),data=dd); bc<-summary(f_c)$coefficients
-cat(sprintf('[C] 全部+聚类稳健: VTI<17 HR=%.2f (%.2f-%.2f) p=%.3g\n', exp(bc['vlow',1]),exp(bc['vlow',1]-1.96*bc['vlow',3]),exp(bc['vlow',1]+1.96*bc['vlow',3]),bc['vlow',5]))
+
+all<-prep(read.csv('h1_data_allstays.csv',stringsAsFactors=FALSE))     # every eligible stay
+first<-prep(read.csv('h1_data.csv',stringsAsFactors=FALSE))           # one record per patient
+cc<-function(x) complete.cases(x[,c('event90','fu_days',covs)]) & x$fu_days>0 & x$vti>0
+
+a<-all[cc(all),]; a$vlow<-as.numeric(a$vti<17)
+b<-first[cc(first),]; b$vlow<-as.numeric(b$vti<17)
+cat('分析集(完整病例): 全部 stay N=',nrow(a),' 唯一患者=',length(unique(a$subject_id)),
+    ' | 首次 ICU N=',nrow(b),' 唯一患者=',length(unique(b$subject_id)),'\n')
+tb<-table(table(a$subject_id)); cat('每患者 stay 数分布:\n'); print(tb)
+cat('>1 stay 的患者数=',sum(table(a$subject_id)>1),' 其贡献 stays=',sum(table(a$subject_id)[table(a$subject_id)>1]),'\n')
+
+hr<-function(f,term='vlow'){ bb<-summary(f)$coefficients
+  sprintf('%.2f (%.2f-%.2f) p=%.3g', exp(bb[term,1]), exp(bb[term,1]-1.96*bb[term,3]), exp(bb[term,1]+1.96*bb[term,3]), bb[term,5]) }
+cat(sprintf('\n[A] 全部 stays            : N=%d  VTI<17 HR=%s\n', nrow(a), hr(coxph(as.formula(paste('Surv(fu_days,event90)~',cov,'+ vlow')),data=a))))
+cat(sprintf('[B] 仅首次 ICU(主分析)     : N=%d  VTI<17 HR=%s\n', nrow(b), hr(coxph(as.formula(paste('Surv(fu_days,event90)~',cov,'+ vlow')),data=b))))
+cat(sprintf('[C] 全部 stays + 患者聚类稳健: N=%d  VTI<17 HR=%s\n', nrow(a),
+            hr(coxph(as.formula(paste('Surv(fu_days,event90)~',cov,'+ vlow + cluster(subject_id)')),data=a))))
