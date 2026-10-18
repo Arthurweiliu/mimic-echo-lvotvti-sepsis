@@ -41,24 +41,34 @@ So the simplest workflow is to copy `scripts/` next to your data files (or pass 
 ## Table and figure provenance
 | Output | Script |
 |---|---|
-| Table 1 (n = 5,410) | `21_primary_table_spline.R` |
+| Table 1 (baseline by VTI category, n = 5410) | `21_primary_table_spline.R` |
+| Table 2 (primary, co-primary, dose–response) | `07_h1.R`, `21_primary_table_spline.R` |
+| Table 3 (effect modification) | `27_validity.R`, `38_fdr_panel.R` |
+| Table 4 (incremental / decision-curve value) | `28_item3.R`, `29_item3_90d.R` |
+| Table S1 (cut-point scan) | `09_vti_cutoff.R`, `22_review4.R`, `41_review2_details.R` |
 | Table S2 (multiple imputation) | `11_mi.R` |
-| Table S3 (flow–congestion) | `10_h1_combo.R` |
-| Table S4 (cut-point scan) | `09_vti_cutoff.R` + `22_review4.R` |
-| Table S5 (E-value) | `26_evalue.R` |
-| Table S6 (selection) | `19_selection.R` |
-| Table S7 (all VTI-available) | `08_h1_outputs.R` |
-| Table S8 | `23_s8.R` |
-| Table S9 (validity-restricted cohorts; adjusted models) | `27_validity.R` |
-| Table S10 (effect modification) | `27_validity.R` |
-| Table S11 (bias analysis) | `27_validity.R` (`26_evalue.R` for the E-value) |
+| Table S3 (PH diagnostics, time-transform) | `12_audit.R`, `13_ph_sens.R` |
+| Table S4 (prespecified sensitivity analyses) | `07_h1.R`, `13_ph_sens.R`, `14_unit_of_analysis.R`, `17_reviewer_checks.R`, `27_validity.R` |
+| Table S5 (measurement-validity analyses) | `27_validity.R` |
+| Table S6 (quantitative bias analysis) | `26_evalue.R`, `27_validity.R` |
+| Table S7 (derived haemodynamic variables) | `34_co_ci.R` |
+| Table S8 (haemodynamic subset vs excluded, SMD) | `42_baseline_smd.R` |
+| Table S9 (LVOT-VTI vs LVEF) | `24_lvef_vs_vti.R` |
+| Table S10 (effect modification and multiplicity) | `27_validity.R`, `38_fdr_panel.R` |
+| Table S11 (flow–congestion phenotype) | `10_h1_combo.R` |
+| Table S12 (unit of analysis) | `14_unit_of_analysis.R` |
+| Table S13 (selection, ascertainment, derivation sensitivity) | `40_reviewer_sensitivity.R`, `41_review2_details.R` |
+| Table S14 (TTE vs no TTE, SMD) | `42_baseline_smd.R` |
+| Table S15 (LVOT-VTI availability, SMD) | `42_baseline_smd.R` |
 | Figure 1 (flow chart) | `16_flowchart.R` |
 | Figure 2 (Kaplan–Meier) | `18_km_tdhr.R` |
-| Figure 3 (forest) | `25_forest.R` |
-| Figure 4 (cut-point scan) | `09_vti_cutoff.R` |
-| Figure 5 (time-dependent HR) | `18_km_tdhr.R` |
+| Figure 3 (per-beat vs per-minute flow) | `36_figure_thesis.R` |
+| Figure 4 (decision curve, 28-day) | `28_item3.R` |
 | Figure S1 (spline) | `21_primary_table_spline.R` |
-| **Figure 3 (per-beat flow vs cardiac output)** | **`36_figure_thesis.R`** |
+| Figure S2 (decision curve, 90-day) | `29_item3_90d.R` |
+| Figure S3 (forest) | `25_forest.R` |
+| Figure S4 (cut-point scan) | `09_vti_cutoff.R` |
+| Figure S5 (time-dependent HR) | `18_km_tdhr.R` |
 | **Figure 4 (decision curve)** | **`29_item3_90d.R`** |
 | **Table 2 (primary + landmark co-primary)** | `07_h1.R` + **`28_item3.R`** |
 | **Table 3 (effect modification, FDR)** | **`38_fdr_panel.R`** (panel) + `27_validity.R` |
