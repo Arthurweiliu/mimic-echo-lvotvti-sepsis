@@ -25,6 +25,9 @@ const VARS = new Set([
   'sept_e_prime','lat_e_prime','e_e_prime','mean_E_to_eprime','septal_E_to_eprime','lateral_E_to_eprime',
   'diastolic_fcn','diastolic_grade',
   'ivc','ivc_diam','pericardial_effusion','tamponade','technical_quality','test_modifier',
+  // measurement-validity variables (LVOT-VTI as an index of forward stroke volume)
+  'aortic_stenosis','aortic_regurg','av_mean_grad','av_pk_grad','av_pk_vel','av_area_continuity',
+  'av_mass','av_leaflets','rest_lvot','induc_lvot','lvot_pk_vel','lvot_mod_mid_apical','mv_valve_area',
   'body_surface_area','weight_kg','height_cm','gender'
 ]);
 
