@@ -37,7 +37,7 @@ for(i in 1:k){
   segments(xp(lo), ys[i], xp(hi), ys[i], lwd=2.4)
   points(xp(hr), ys[i], pch=18, cex=1.6)
   text(p1-0.30, ys[i], items[[i]][1], adj=1, cex=1.0)
-  text(p2+0.30, ys[i], sprintf('%.2f (%.2f-%.2f)', hr, lo, hi), adj=0, cex=1.0)
+  text(p2+0.30, ys[i], sprintf('%.2f (%.2f–%.2f)', hr, lo, hi), adj=0, cex=1.0)
 }
 ticks<-c(0.9,1.0,1.1,1.2,1.3,1.4,1.5)
 axis(1, at=xp(ticks), labels=sprintf('%.1f',ticks), cex.axis=0.92, gap.axis=0)
