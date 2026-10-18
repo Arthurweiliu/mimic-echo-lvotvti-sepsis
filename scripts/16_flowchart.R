@@ -43,7 +43,7 @@ down(y4-h4/2, y5+h5/2); down(y5-h5/2, y6+h6/2); down(y6-h6/2, y7+h7/2)
 
 excl(y4, c("Subsequent ICU stays", "excluded (n = 2,016)"))
 excl(y5, c("No LVOT-VTI", "(n = 4,867)"))
-excl(y6, c("Missing covariates", "(n = 1,843)"))
+excl(y6, c("Missing covariates or", "no follow-up (n = 1,843)"))
 
 ## ---- downstream branches (Sets B and C) ----
 y8 <- -0.85; h8 <- 1.75
