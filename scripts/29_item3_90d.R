@@ -35,9 +35,9 @@ run <- function(outcome, br, ptmax, tag) {
   write.csv(nb, paste0('Item3_DCA_', tag, '.csv'), row.names = FALSE)
   cat('  DCA delta NB: '); for (t in seq(0.1, min(ptmax,0.5), 0.1)) { i <- which.min(abs(nb$pt-t))
     cat(sprintf('pt=%.2f:%+.4f ', t, nb$delta[i])) }; cat('\n')
-  png(paste0('Item3_DCA_', tag, '.png'), width = 1200, height = 950, res = 150)
+  png(paste0('Item3_DCA_', tag, '.png'), width = 3900, height = 3000, res = 600)
   plot(nb$pt, nb$base_VTI, type='l', lwd=3, col='#1f6fb2', ylim=range(c(0, nb$all, nb$base, nb$base_VTI), na.rm=TRUE),
-       xlab='Threshold probability', ylab='Net benefit', main=paste0('DCA — ', tag))
+       xlab='Threshold probability', ylab='Net benefit')
   lines(nb$pt, nb$base, lwd=2, col='#d1495b'); lines(nb$pt, nb$all, lwd=1.2, lty=2, col='grey40')
   abline(h=0, lwd=1.2, col='grey70')
   legend('topright', c('Clinical + LVOT-VTI','Clinical only','Treat all','Treat none'),
