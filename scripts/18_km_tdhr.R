@@ -13,7 +13,7 @@ dd$vcat2<-factor(ifelse(dd$vti<17,'VTI < 17 cm', ifelse(dd$vti<=20,'VTI 17-20 cm
                  levels=c('VTI < 17 cm','VTI 17-20 cm','VTI > 20 cm'))
 dd$vlow<-as.numeric(dd$vti<17)
 cols<-c('#c0392b','#e08a1e','#1f4e9c')          # print-safe version of red / orange / blue
-lab <-c('< 17 cm','17-20 cm','> 20 cm')
+lab <-c('< 17 cm','17–20 cm','> 20 cm')
 
 # --- KM with number at risk ---
 png('H1_KM_VTI.png', 3900, 3000, res=600)
@@ -26,12 +26,12 @@ plot(fit, col=cols, lwd=2.4, xlim=c(0,90), ylim=c(ylo,1.0), xaxt='n',
 axis(1, at=tt, labels=tt, line=0, cex.axis=1.0)
 mtext('Days from ICU admission', side=1, line=1.9, cex=1.1)
 legend('bottomleft', levels(dd$vcat2), col=cols, lwd=2.4, bty='n', cex=1.0)
-mtext('Number at risk', side=1, line=3.7, adj=1, at=-1, cex=0.95, font=2)
+mtext('No. at risk', side=1, line=3.7, adj=1, at=-2.6, cex=0.95, font=2)
 for(i in 1:3){
   g<-levels(dd$vcat2)[i]
   nr<-sapply(tt, function(t) sum(dd$fu_days>=t & dd$vcat2==g))
-  mtext(lab[i],            side=1, at=-1, adj=1, line=5.1+(i-1)*1.2, cex=0.9, col='black')
-  mtext(as.character(nr),  side=1, at=tt, adj=0, line=5.1+(i-1)*1.2, cex=0.9, col='black')
+  mtext(lab[i],            side=1, at=-2.6, adj=1, line=5.1+(i-1)*1.2, cex=0.9, col='black')
+  mtext(formatC(nr, big.mark=',', format='d'),  side=1, at=tt, adj=0, line=5.1+(i-1)*1.2, cex=0.9, col='black')
 }
 dev.off(); cat('saved H1_KM_VTI.png (with number at risk)\n')
 
