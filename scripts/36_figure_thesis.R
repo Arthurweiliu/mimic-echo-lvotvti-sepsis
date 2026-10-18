@@ -24,7 +24,7 @@ H$vlow <- as.numeric(H$vti<17); H$tachy <- as.numeric(H$hr>100)
 
 expos <- list(c('vti',5,'LVOT-VTI (+5 cm)'), c('sv',10,'Stroke volume (+10 mL)'),
   c('lvef',10,'LVEF (+10 %)'), c('co',1,'Cardiac output (+1 L/min)'),
-  c('ci',1,'Cardiac index (+1 L/min/m2)'), c('hr',10,'Heart rate (+10 bpm)'))
+  c('ci',1,'Cardiac index (+1 L/min/m²)'), c('hr',10,'Heart rate (+10 bpm)'))
 res <- data.frame()
 for (e in expos){ var<-e[1]; k<-as.numeric(e[2]); lab<-e[3]
   f <- coxph(as.formula(paste('Surv(fu_days,event90)~',cov,'+',var)), data=H); b<-summary(f)$coefficients
@@ -35,7 +35,7 @@ res$lab <- factor(res$lab, levels=rev(res$lab))
 write.csv(res,'Item4_thesis_forest.csv', row.names=FALSE)
 print(res)
 
-png('Item4_thesis_figure.png', width=2000, height=1500, res=170)
+png('Item4_thesis_figure.png', width=3900, height=2900, res=600)
 layout(matrix(c(1,1,2,2,3,3), ncol=2, byrow=TRUE), heights=c(1.25,1,1))
 # Panel A forest
 par(mar=c(4,13,3,2))
@@ -69,7 +69,7 @@ axis(2, at=ys, labels=labs, las=1, cex.axis=0.85)
 par(mar=c(1,2,1,2)); plot.new()
 text(0.5,0.86,'C. The cancellation', cex=1.15, font=2)
 text(0.5,0.62,'SV (protective)  x  HR (adverse)  =  CO (no association)', cex=1.0)
-text(0.5,0.42,'HR 1.09 / 10 bpm   |   SV 0.95 / 10 mL   ->   CO 0.99 / 1 L/min (NS)', cex=0.85, col='grey25')
+text(0.5,0.42,'HR 1.09 / 10 bpm   |   SV 0.94 / 10 mL   ->   CO 0.99 / 1 L/min (NS)', cex=0.85, col='grey25')
 text(0.5,0.22,'A per-beat measure keeps the signal; a per-minute measure cancels it.', cex=0.9, font=3, col='grey20')
 dev.off()
 cat('\nsaved Item4_thesis_figure.png\n'); print(strat)
