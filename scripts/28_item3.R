@@ -113,7 +113,7 @@ for (t in c(0.10, 0.15, 0.20, 0.25, 0.30, 0.40)) {
   i <- which.min(abs(nb$pt - t))
   cat(sprintf('    pt=%.2f  base=%.4f  +VTI=%.4f  delta=%+.4f  (all=%.4f)\n', t, nb$base[i], nb$base_VTI[i], nb$delta[i], nb$all[i]))
 }
-png('Item3_DCA_28d.png', width = 1200, height = 950, res = 150)
+png('Item3_DCA_28d.png', width = 3900, height = 3000, res = 600)
 plot(nb$pt, nb$base_VTI, type = 'l', lwd = 3, col = '#1f6fb2', ylim = range(c(0, nb$all, nb$base, nb$base_VTI), na.rm = TRUE),
      xlab = 'Threshold probability', ylab = 'Net benefit', main = 'Decision curve analysis (28-day mortality)')
 lines(nb$pt, nb$base, lwd = 2, col = '#d1495b')
