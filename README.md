@@ -48,18 +48,16 @@ So the simplest workflow is to copy `scripts/` next to your data files (or pass 
 | Table S1 (cut-point scan) | `09_vti_cutoff.R`, `22_review4.R`, `41_review2_details.R` |
 | Table S2 (multiple imputation) | `11_mi.R` |
 | Table S3 (PH diagnostics, time-transform) | `12_audit.R`, `13_ph_sens.R` |
-| Table S4 (prespecified sensitivity analyses) | `07_h1.R`, `13_ph_sens.R`, `14_unit_of_analysis.R`, `17_reviewer_checks.R`, `27_validity.R` |
-| Table S5 (measurement-validity analyses) | `27_validity.R` |
-| Table S6 (quantitative bias analysis) | `26_evalue.R`, `27_validity.R` |
-| Table S7 (derived haemodynamic variables) | `34_co_ci.R` |
-| Table S8 (haemodynamic subset vs excluded, SMD) | `42_baseline_smd.R` |
-| Table S9 (LVOT-VTI vs LVEF) | `24_lvef_vs_vti.R` |
-| Table S10 (effect modification and multiplicity) | `27_validity.R`, `38_fdr_panel.R` |
-| Table S11 (flow–congestion phenotype) | `10_h1_combo.R` |
-| Table S12 (unit of analysis) | `14_unit_of_analysis.R` |
-| Table S13 (selection, ascertainment, derivation sensitivity) | `40_reviewer_sensitivity.R`, `41_review2_details.R` |
-| Table S14 (TTE vs no TTE, SMD) | `42_baseline_smd.R` |
-| Table S15 (LVOT-VTI availability, SMD) | `42_baseline_smd.R` |
+| Table S4 (measurement-validity analyses) | `27_validity.R` |
+| Table S5 (quantitative bias analysis) | `26_evalue.R`, `27_validity.R` |
+| Table S6 (derived haemodynamic variables) | `34_co_ci.R` |
+| Table S7 (haemodynamic subset vs excluded, SMD) | `42_baseline_smd.R` |
+| Table S8 (effect modification and multiplicity) | `27_validity.R`, `38_fdr_panel.R` |
+| Table S9 (flow–congestion phenotype) | `10_h1_combo.R` |
+| Table S10 (unit of analysis) | `14_unit_of_analysis.R` |
+| Table S11 (selection, ascertainment, derivation sensitivity; incl. additional sensitivity analyses) | `40_reviewer_sensitivity.R`, `41_review2_details.R` |
+| Table S12 (TTE vs no TTE, SMD) | `42_baseline_smd.R` |
+| Table S13 (LVOT-VTI availability, SMD) | `42_baseline_smd.R` |
 | Figure 1 (flow chart) | `16_flowchart.R` |
 | Figure 2 (Kaplan–Meier) | `18_km_tdhr.R` |
 | Figure 3 (per-beat vs per-minute flow) | `36_figure_thesis.R` |
@@ -69,12 +67,8 @@ So the simplest workflow is to copy `scripts/` next to your data files (or pass 
 | Figure S3 (forest) | `25_forest.R` |
 | Figure S4 (cut-point scan) | `09_vti_cutoff.R` |
 | Figure S5 (time-dependent HR) | `18_km_tdhr.R` |
-| **Figure 4 (decision curve)** | **`29_item3_90d.R`** |
-| **Table 2 (primary + landmark co-primary)** | `07_h1.R` + **`28_item3.R`** |
-| **Table 3 (effect modification, FDR)** | **`38_fdr_panel.R`** (panel) + `27_validity.R` |
-| **Table 4 (incremental / decision value)** | **`28_item3.R` / `29_item3_90d.R`** |
-| **Table S-x (SV / CO / CI derivation)** | **`34_co_ci.R`** |
-| **Table S-x (selection diagnostics)** | **`37_audit_methods.R`** |
+
+The LVEF head-to-head analysis (`24_lvef_vs_vti.R`) remains in the repository but is no longer reported as a table.
 
 Figures are written as 600 dpi PNG (`png(..., res=600)`) and converted to LZW TIFF at 600 dpi for submission. All annotation text is black; colour is used only for series lines.
 
