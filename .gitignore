@@ -1,15 +1,32 @@
-# Data must NOT be committed (PhysioNet DUA): exclude all data and credentials
-*.csv
+# data and intermediates that must never be committed
 *.csv.gz
-*.gz
-*.sav
-*.dta
-*.parquet
 data/
-physionet/
-_physionet_cred.json
-_physionet_cookies.json
-*.pdf
+raw/
+sepsis_echo_lit/
+*.sql.gz
+lac.csv
+h1_data*.csv
+linked_cohort.csv
+sepsis3_icustays.csv
+analysis_data.csv
+echo_extra.csv
+tte_*.csv
+structured-measurement.csv*
+cohort_covariates.csv
+aki_outcomes.csv
+*.rds
+lactate_v2.csv
+
+# logs and editor noise
+*.log
+out.txt
+*_out.txt
+.Rhistory
+.RData
+.Rproj.user/
+.DS_Store
+Thumbs.db
+
+# rendered documents are regenerated from Markdown
 *.docx
-*.tiff
-*.png
+~$*

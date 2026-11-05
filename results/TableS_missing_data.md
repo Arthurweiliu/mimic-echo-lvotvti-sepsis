@@ -1,0 +1,12 @@
+### Table S. Missing-data sensitivity: VTI < 17 vs >= 17 cm for 90-day mortality
+
+| Analysis | Lactate source | n | Deaths | HR (95% CI) | p | FMI |
+|---|---|---:|---:|---|---|---:|
+| MI, m = 20 | Blood gas only | 4,816 | 1,573 | 1.33 (1.19-1.48) | 2.6e-07 | 0.004 |
+| MI, m = 20 | Blood gas + chemistry (primary) | 4,816 | 1,573 | 1.32 (1.19-1.47) | 2.8e-07 | 0.004 |
+| MI, m = 20 | Blood gas + chemistry + nearest | 4,816 | 1,573 | 1.32 (1.19-1.47) | 3.4e-07 | 0.002 |
+| Complete case | Blood gas only | 3,573 | 1,262 | 1.26 (1.12-1.42) | - | - |
+| Complete case | Blood gas + chemistry | 3,902 | 1,343 | 1.29 (1.15-1.44) | - | - |
+| Complete case | Blood gas + chemistry + nearest | 4,346 | 1,449 | 1.30 (1.16-1.45) | - | - |
+
+*All models adjusted for age, sex, SOFA, Charlson index, lactate and creatinine, with left truncation at the index TTE. FMI, fraction of missing information. The primary analysis is multiple imputation (m = 20) in the 4,816-patient cohort; complete-case rows are shown for comparison.*
