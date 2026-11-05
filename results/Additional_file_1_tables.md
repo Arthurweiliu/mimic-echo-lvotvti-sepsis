@@ -1,6 +1,6 @@
 # Additional file 1. Supplementary tables
 
-Supplementary tables for: *Beyond linear coefficients: LVOT-VTI and LVEF carry complementary non-linear prognostic information in sepsis, whereas echocardiography-derived cardiac output adds little*.
+Supplementary tables for: *LVOT-VTI and LVEF in sepsis: non-linear associations with 90-day mortality and the limited value of derived cardiac output*.
 
 ---
 

@@ -2,7 +2,7 @@
 
 Analysis code for the manuscript:
 
-> **Beyond linear coefficients: LVOT-VTI and LVEF carry complementary non-linear prognostic information in sepsis, whereas echocardiography-derived cardiac output adds little**
+> **LVOT-VTI and LVEF in sepsis: non-linear associations with 90-day mortality and the limited value of derived cardiac output**
 
 The study uses MIMIC-IV v3.1 and MIMIC-IV-ECHO v1.0.1. **No patient-level data are included in this repository**; the MIMIC databases are available to credentialed users under a data use agreement (https://physionet.org/content/mimiciv/ and https://physionet.org/content/mimic-iv-echo/). This repository contains the code, the protocol, and the aggregate results needed to reproduce every number in the paper.
 
