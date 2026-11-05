@@ -100,6 +100,11 @@ All scripts set `seed = 20261105`, so repeated runs reproduce the same imputatio
 | Per-SD VTI / LVEF / eCI | 0.779 / 1.004 / 1.204 | `03_headtohead/67` |
 | Functional form (six measures) | Table S3 | `04_sensitivity/79_s3_mi.R` |
 | Residual sensitivity | Table S4 | `04_sensitivity/78_s4_mi.R` |
+| 28-day contrast | 1.31 (1.16-1.48) | `02_primary/82_compare_addons.R` |
+| Alternative VTI cut-points | Table S6; 1.28-1.33 | `04_sensitivity/83_cutpoints_knots_d3.R` |
+| 4-knot spline | 2-delta log-likelihood 48.0 (1 df) | same |
+| Phenotype by VTI category | Table S7 | `05_tables_figures/84_phenotype.R` |
+| Optimism-corrected calibration slope | 0.979 (H1) / 0.989 (H2) | `03_headtohead/86_calib_opt.R` |
 | eCO alternative | Table S5 | `04_sensitivity/80_eco_mi.R` |
 
 `06_audit/64_number_audit.mjs` re-checks that every hazard ratio quoted in the manuscript appears in one of these outputs.
