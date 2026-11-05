@@ -38,7 +38,7 @@ Point `MIMIC_ECHO_DIR` at a directory holding the derived tables exported from y
 | `cohort_covariates.csv` | `00_inputs/build_cohort_covariates.sql` | first-day covariates, outcomes |
 | `linked_cohort.csv` | `00_inputs/build_cohort_link.mjs` | ICU stay ↔ echo study link with signed hours from admission |
 | `h1_data.csv` | `00_inputs/build_h1.mjs` | one row per stay: covariates, LVEF, LVOT diameter, VTI, follow-up |
-| `Analysis_data.csv` → `analysis_data.csv` | `00_inputs/merge_analysis.mjs` | echo measurements, body surface area |
+| `analysis_data.csv` | `00_inputs/merge_analysis.mjs` | echo measurements, body surface area |
 | `echo_extra.csv` | `00_inputs/extract_echo_extra.mjs` | long-format echo measurements (resting heart rate) |
 | `lac.csv` | user export of `labevents` itemid 50813 | serum lactate (chemistry) |
 
