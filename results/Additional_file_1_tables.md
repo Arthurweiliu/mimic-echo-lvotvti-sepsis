@@ -19,8 +19,9 @@ Supplementary tables for: *LVOT-VTI and LVEF in sepsis: non-linear associations 
 
 ## Table S2. Missing-data sensitivity: VTI < 17 vs >= 17 cm for 90-day mortality
 
+
 | Analysis | Lactate source | n | Deaths | HR (95% CI) | p | FMI |
-|---|---|---:|---:|---|---:|---:|
+|---|---|---:|---:|---|---|---:|
 | MI, m = 20 | Blood gas only | 4,816 | 1,573 | 1.33 (1.19-1.48) | 2.6e-07 | 0.004 |
 | MI, m = 20 | Blood gas + chemistry (primary) | 4,816 | 1,573 | 1.32 (1.19-1.47) | 2.8e-07 | 0.004 |
 | MI, m = 20 | Blood gas + chemistry + nearest | 4,816 | 1,573 | 1.32 (1.19-1.47) | 3.4e-07 | 0.002 |
@@ -28,7 +29,7 @@ Supplementary tables for: *LVOT-VTI and LVEF in sepsis: non-linear associations 
 | Complete case | Blood gas + chemistry | 3,902 | 1,343 | 1.29 (1.15-1.44) | - | - |
 | Complete case | Blood gas + chemistry + nearest | 4,346 | 1,449 | 1.30 (1.16-1.45) | - | - |
 
-**Note.** All models adjusted for age, sex, SOFA, Charlson index, lactate and creatinine, with left truncation at the index TTE. FMI, fraction of missing information. The primary analysis is multiple imputation (m = 20) in the 4,816-patient cohort. "Chemistry" denotes the maximum serum chemistry lactate within 24 h of ICU admission; "nearest" denotes the closest chemistry value within +/-12 h of that window.
+*All models adjusted for age, sex, SOFA, Charlson index, lactate and creatinine, with left truncation at the index TTE. FMI, fraction of missing information. The primary analysis is multiple imputation (m = 20) in the 4,816-patient cohort; complete-case rows are shown for comparison.*
 
 ---
 
@@ -37,15 +38,15 @@ Supplementary tables for: *LVOT-VTI and LVEF in sepsis: non-linear associations 
 
 | Measure | Contrast | n | Deaths | Linear HR (95% CI) | p linear | Non-linearity p | Overall p | delta AIC (spline - linear) |
 |---|---|---:|---:|---|---:|---:|---:|---:|
-| LVOT-VTI | per 5 | 4,816 | 1,573 | 0.93 (0.90-0.97) | <0.001 | 0.00085 | 3.8e-08 | +10.1 |
-| Stroke volume | per 10 | 4,547 | 1,476 | 0.97 (0.95-0.99) | 0.006 | 0.00019 | 5.8e-07 | +13.2 |
-| Cardiac output | per 1 | 4,502 | 1,468 | 1.01 (0.99-1.04) | 0.302 | 0.00057 | 0.0018 | +10.9 |
-| Cardiac index | per 1 | 4,276 | 1,382 | 1.06 (1.02-1.11) | 0.008 | 0.00027 | 0.00037 | +12.5 |
-| Heart rate | per 10 | 4,768 | 1,563 | 1.08 (1.05-1.11) | <0.001 | 0.97 | 2.1e-07 | -3.9 |
-| LVEF | per 10 | 4,336 | 1,403 | 0.97 (0.94-1.00) | 0.065 | 1.9e-12 | 2.1e-12 | +50.0 |
+| LVOT-VTI | per 5 | 4,851 | 1,608 | 0.93 (0.90-0.97) | <0.001 | 0.00093 | 3.1e-08 | +10.0 |
+| Stroke volume | per 10 | 4,579 | 1,508 | 0.97 (0.95-0.99) | 0.003 | 0.00019 | 2.3e-07 | +13.1 |
+| Cardiac output | per 1 | 4,534 | 1,500 | 1.01 (0.99-1.03) | 0.440 | 0.0009 | 0.0024 | +10.0 |
+| Cardiac index | per 1 | 4,307 | 1,413 | 1.06 (1.01-1.11) | 0.018 | 0.00039 | 0.00069 | +11.7 |
+| Heart rate | per 10 | 4,803 | 1,598 | 1.08 (1.05-1.11) | <0.001 | 0.99 | 1.9e-07 | -4.0 |
+| LVEF | per 10 | 4,369 | 1,436 | 0.97 (0.94-1.00) | 0.049 | 6.1e-12 | 5.4e-12 | +47.6 |
 
+*Covariates imputed (m = 20) within each measure-specific cohort; the markers themselves are not imputed. The linear coefficient is fitted on the untransformed exposure (the quantity under test) and pooled by Rubin's rules; the non-linearity test compares a 3-df natural spline with a linear term on the same scale (log for the flow measures, untransformed for LVEF and heart rate) and is reported as the median p across the 20 imputations. A positive delta AIC means the spline fits better.*
 
-**Note.** Covariates imputed (m = 20) within each measure-specific cohort; the markers themselves are not imputed. The linear coefficient is fitted on the untransformed exposure (the quantity under test) and pooled by Rubin's rules; the non-linearity test compares a 3-df natural spline with a linear term on the same scale (log for the flow measures, untransformed for LVEF and heart rate) and is reported as the median p across the 20 imputations. A positive delta AIC means the spline fits better.
 
 ---
 
@@ -53,13 +54,13 @@ Supplementary tables for: *LVOT-VTI and LVEF in sepsis: non-linear associations 
 
 | Analysis | n | Deaths | HR for VTI < 17 vs >= 17 cm (95% CI) |
 |---|---:|---:|---|
-| Primary (index TTE 0-72 h, first stay) | 4,816 | 1,573 | 1.32 (1.19-1.47) |
-| All in-window stays (first stay not required) | 5,306 | 1,759 | 1.29 (1.17-1.43) |
-| Index TTE within 24 h | 3,020 | 1,060 | 1.26 (1.11-1.44) |
-| Index TTE within 48 h | 4,167 | 1,399 | 1.30 (1.17-1.46) |
-| Excluding poor or suboptimal image quality | 3,234 | 1,058 | 1.42 (1.24-1.62) |
-| Excluding moderate-or-worse aortic stenosis | 4,543 | 1,455 | 1.31 (1.17-1.46) |
-| Excluding moderate or large pericardial effusion | 4,785 | 1,558 | 1.32 (1.19-1.47) |
+| Primary (index TTE 0-72 h, first stay) | 4,851 | 1,608 | 1.32 (1.19-1.47) |
+| All in-window stays (first stay not required) | 5,344 | 1,797 | 1.30 (1.18-1.43) |
+| Index TTE within 24 h | 3,048 | 1,088 | 1.27 (1.12-1.44) |
+| Index TTE within 48 h | 4,202 | 1,434 | 1.30 (1.17-1.46) |
+| Excluding poor or suboptimal image quality | 3,258 | 1,082 | 1.42 (1.25-1.61) |
+| Excluding moderate-or-worse aortic stenosis | 4,574 | 1,486 | 1.31 (1.17-1.46) |
+| Excluding moderate or large pericardial effusion | 4,820 | 1,593 | 1.33 (1.19-1.47) |
 
 **Note.** Every row is a separate multiple imputation (m = 20) in the stated subset with the same covariate set and imputation model as the primary analysis; the imaging-window rows restrict the index TTE further, and the last three rows exclude defined abnormalities. The primary row is repeated for reference.
 
@@ -69,11 +70,11 @@ Supplementary tables for: *LVOT-VTI and LVEF in sepsis: non-linear associations 
 
 | Model | n | Deaths | AUC | delta AUC |
 |---|---:|---:|---:|---:|
-| Clinical | 4,023 | 1,295 | 0.7330 | - |
-| VTI + LVEF splines | 4,023 | 1,295 | 0.7466 | +0.0135 |
-| VTI + LVEF + eCO splines | 4,023 | 1,295 | 0.7471 | +0.0141 |
+| Clinical | 4,054 | 1,326 | 0.7344 | - |
+| VTI + LVEF splines | 4,054 | 1,326 | 0.7480 | +0.0136 |
+| VTI + LVEF + eCO splines | 4,054 | 1,326 | 0.7484 | +0.0140 |
 
-**Note.** eCO = stroke volume x echo-time heart rate (L/min) and does not require body surface area, so the analysis set is larger than H2 (4,023 vs 3,815 patients). Covariates imputed (m = 20); predicted risks averaged over imputations. eCO added +0.0006 beyond VTI + LVEF.
+**Note.** eCO = stroke volume x echo-time heart rate (L/min) and does not require body surface area, so the analysis set is larger than H2 (4,054 vs 3,845 patients). Covariates imputed (m = 20); predicted risks averaged over imputations. eCO added +0.0004 beyond VTI + LVEF.
 
 ---
 
@@ -81,11 +82,11 @@ Supplementary tables for: *LVOT-VTI and LVEF in sepsis: non-linear associations 
 
 | Definition | n low | n high | HR (95% CI) |
 |---|---:|---:|---|
-| VTI <17 cm vs rest | 1,326 | 3,490 | 1.326 (1.191-1.476) |
-| VTI <=17 cm vs rest | 1,595 | 3,221 | 1.280 (1.153-1.420) |
-| VTI <16.5 cm vs rest | 1,325 | 3,491 | 1.326 (1.191-1.477) |
-| VTI <18 cm vs rest | 1,595 | 3,221 | 1.280 (1.153-1.420) |
-| VTI <16 cm vs rest | 1,060 | 3,756 | 1.333 (1.191-1.492) |
+| VTI <17 cm vs rest | 1,344 | 3,507 | 1.325 (1.192-1.473) |
+| VTI <=17 cm vs rest | 1,614 | 3,237 | 1.277 (1.152-1.416) |
+| VTI <16.5 cm vs rest | 1,343 | 3,508 | 1.326 (1.192-1.474) |
+| VTI <18 cm vs rest | 1,614 | 3,237 | 1.277 (1.152-1.416) |
+| VTI <16 cm vs rest | 1,076 | 3,775 | 1.333 (1.192-1.490) |
 
 **Note.** All five definitions were fitted in the same 20 imputations and the same patients; only the boundary moves. VTI is recorded to whole centimetres, so the "< 18" and "<= 17" definitions contain the same patients.
 
@@ -93,28 +94,28 @@ Supplementary tables for: *LVOT-VTI and LVEF in sepsis: non-linear associations 
 
 ## Table S7. Haemodynamic and geometric phenotype by VTI category
 
+
 | Variable | Overall | < 17 cm | 17-20 cm | > 20 cm | p | Missing, n |
 |---|---|---|---|---|---:|---:|
-| Heart rate, bpm | 86.4 (74.9-98.5) | 92.4 (80.7-106.4) | 87.4 (76.5-99.1) | 82.3 (71.6-93.3) | <0.001 | 3 |
-| Mean arterial pressure, mmHg | 75.3 (69.6-82.6) | 75.9 (70.4-82.8) | 75.3 (70.5-82.5) | 74.7 (68.6-82.5) | <0.001 | 3 |
-| Stroke volume, mL | 65.2 (50.3-81.7) | 42.5 (34.6-50.3) | 59.7 (53.4-68.4) | 79.7 (69.1-94.2) | <0.001 | 269 |
-| Cardiac output, L/min | 5.52 (4.25-6.95) | 3.92 (3.11-4.78) | 5.24 (4.33-6.26) | 6.52 (5.46-7.95) | <0.001 | 272 |
-| Estimated SVR, dyn s cm-5 | 1109 (867-1449) | 1546 (1262-2009) | 1175 (962-1433) | 923 (751-1123) | <0.001 | 272 |
-| LV end-diastolic dimension, cm | 4.50 (4.00-5.10) | 4.60 (4.00-5.30) | 4.50 (3.90-5.00) | 4.50 (4.00-5.00) | <0.001 | 214 |
-| Norepinephrine, ug/kg/min | 0.250 (0.110-0.520) | 0.301 (0.150-0.641) | 0.202 (0.100-0.500) | 0.201 (0.100-0.500) | <0.001 | 2189 |
-| Lactate, mmol/L | 2.2 (1.4-3.8) | 2.8 (1.8-5.1) | 2.1 (1.4-3.5) | 1.9 (1.3-3.4) | <0.001 | 1242 |
-| Urine output, first 24 h, mL | 1425 (800-2310) | 1285 (660-2125) | 1465 (880-2409) | 1485 (840-2350) | <0.001 | 127 |
+| Heart rate, bpm | 86.4 (75.0-98.6) | 92.6 (80.7-106.4) | 87.5 (76.6-99.2) | 82.3 (71.6-93.3) | <0.001 | 3 |
+| Mean arterial pressure, mmHg | 75.2 (69.6-82.6) | 75.9 (70.4-82.8) | 75.3 (70.4-82.5) | 74.7 (68.6-82.5) | <0.001 | 3 |
+| Stroke volume, mL | 65.2 (50.3-81.7) | 42.5 (34.6-50.3) | 59.7 (53.4-68.4) | 79.7 (69.1-94.2) | <0.001 | 272 |
+| Cardiac output, L/min | 5.50 (4.25-6.94) | 3.92 (3.11-4.76) | 5.24 (4.33-6.26) | 6.52 (5.46-7.95) | <0.001 | 275 |
+| Estimated SVR, dyn s cm-5 | 1111 (867-1451) | 1546 (1263-2010) | 1176 (962-1433) | 923 (752-1123) | <0.001 | 275 |
+| LV end-diastolic dimension, cm | 4.50 (4.00-5.10) | 4.60 (4.00-5.30) | 4.50 (3.90-5.00) | 4.50 (4.00-5.00) | <0.001 | 217 |
+| Norepinephrine, ug/kg/min | 0.250 (0.120-0.525) | 0.301 (0.150-0.651) | 0.207 (0.100-0.501) | 0.201 (0.100-0.500) | <0.001 | 2192 |
+| Lactate, mmol/L | 2.2 (1.4-3.8) | 2.8 (1.8-5.1) | 2.1 (1.4-3.5) | 1.9 (1.3-3.4) | <0.001 | 1244 |
+| Urine output, first 24 h, mL | 1420 (795-2310) | 1278 (650-2121) | 1460 (875-2410) | 1482 (836-2350) | <0.001 | 130 |
 
 *Median (IQR); Kruskal-Wallis test across the three categories. Cardiac output = stroke volume x echo heart rate / 1000; estimated SVR = 80 x mean arterial pressure / cardiac output. LV end-diastolic dimension was available only where the reporting template recorded it. Urine output is the first-24 h total from the derived covariates table.*
 
 ---
 
-### Table S8. Cohort-definition sensitivity analyses
+## Table S8. Cohort-definition sensitivity analysis
 
 | Analysis | n | Deaths | HR for VTI < 17 vs >= 17 cm (95% CI) |
 |---|---:|---:|---|
-| Primary (first Sepsis-3 ICU stay) | 4,816 | 1,573 | 1.32 (1.19-1.47) |
-| Restricted to the first ICU stay of any kind | 4,275 | 1,390 | 1.33 (1.19-1.49) |
-| Re-including patients whose precise death time followed the index study | 4,848 | 1,605 | 1.33 (1.20-1.48) |
+| Primary (first Sepsis-3 ICU stay) | 4,851 | 1,608 | 1.32 (1.19-1.47) |
+| Restricted to the first ICU stay of any kind | 4,305 | 1,420 | 1.32 (1.18-1.48) |
 
-**Note.** The first row is the primary analysis. The second implements a stricter unit-of-analysis rule: the patient's first ICU stay of any kind, which excludes 541 patients (11.2%) who entered through a later ICU stay after an earlier non-septic stay. The third addresses the day-level resolution of recorded death dates: the primary analysis requires the recorded death to follow the index study, which removes 32 patients who in fact died later on the same calendar day; here they are re-included with their precise death time taken from the admissions table. All three models used the same covariates and multiple imputation (m = 20).
+**Note.** The first row is the primary analysis. The second implements a stricter unit-of-analysis rule: the patient's first ICU stay of any kind, which excludes 546 patients (11.3%) who entered through a later ICU stay after an earlier non-septic stay (90-day mortality 34.4% in those excluded versus 33.0% in the patients retained). Both models used the same covariates and multiple imputation (m = 20); death times were the precise hospital death timestamps where available (see Outcomes).

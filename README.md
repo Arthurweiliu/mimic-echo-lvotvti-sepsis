@@ -90,14 +90,14 @@ All scripts set `seed = 20261105`, so repeated runs reproduce the same imputatio
 
 | Quantity | Value in the paper | Where |
 |---|---|---|
-| Primary cohort | 4,816 patients, 1,573 deaths | `01_cohort/66_counts.R` output |
-| VTI < 17 vs >= 17, MI | 1.32 (1.19–1.47), FMI 0.004 | `02_primary/52_mi_primary_v2.R` |
+| Primary cohort | 4,851 patients, 1,608 deaths | `01_cohort/108_build_precise_outcomes.R` -> `66_counts.R` |
+| VTI < 17 vs >= 17, MI | 1.32 (1.19–1.47), FMI 0.002 | `02_primary/52_mi_primary_v2.R` |
 | Per +5 cm | 0.93 (0.90–0.97) | same |
 | Days 0–7 / day-7 landmark | 1.50 (1.26–1.78) / 1.34 (1.17–1.53) | `02_primary/55_ph_mi.R` |
-| H1 combined delta AUC | +0.0128 (0.0084–0.0197) | `03_headtohead/67`, `68` |
-| H2 all-spline delta AUC | +0.0150 (0.0097–0.0231) | same |
-| Optimism-corrected C | 0.7015 (H1) / 0.7079 (H2) | `03_headtohead/73` |
-| Per-SD VTI / LVEF / eCI | 0.779 / 1.004 / 1.204 | `03_headtohead/67` |
+| H1 combined delta AUC | +0.0129 (0.0081–0.0196) | `03_headtohead/67`, `68` |
+| H2 all-spline delta AUC | +0.0146 (0.0097–0.0223) | same |
+| Optimism-corrected C | 0.7023 (H1) / 0.7083 (H2) | `03_headtohead/73` |
+| Per-SD VTI / LVEF / eCI | 0.786 / 1.003 / 1.189 | `03_headtohead/67` |
 | Functional form (six measures) | Table S3 | `04_sensitivity/79_s3_mi.R` |
 | Residual sensitivity | Table S4 | `04_sensitivity/78_s4_mi.R` |
 | 28-day contrast | 1.31 (1.16-1.48) | `02_primary/82_compare_addons.R` |
